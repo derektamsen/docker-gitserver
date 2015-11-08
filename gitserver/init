@@ -23,8 +23,6 @@ fi
 if ! grep -qs "# gitolite start" /data/git/.ssh/authorized_keys; then
   echo "${SSH_KEY}" > "/data/git/${SSH_ADMIN}.pub"
   su git -c "/usr/bin/gitolite setup -pk /data/git/${SSH_ADMIN}.pub"
-else
-  su git -c "/usr/bin/gitolite setup"
 fi
 
 echo "Running: $*"
