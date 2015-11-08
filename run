@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo 'Starting the data container...'
+sudo docker run --memory 512m --cpu-shares 512 -v /data \
+  --name gitserver-data derektamsen/gitserver-data
