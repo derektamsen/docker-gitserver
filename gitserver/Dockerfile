@@ -9,10 +9,6 @@ RUN apt-get update && apt-get install -y \
   git \
   gitolite3
 
-# gen locales
-RUN locale-gen en_US.UTF-8
-RUN dpkg-reconfigure locales
-
 # Fixup stuff for sshd
 RUN mkdir -p /var/run/sshd
 RUN sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config
