@@ -21,7 +21,7 @@ RUN mkdir -p /data/etc/ssh
 RUN adduser --system --shell /bin/bash --group --disabled-password --home /data/git git
 
 # add setup script
-ADD ./init.sh /init
+ADD ./init /init
 RUN chmod +x /init
 
 EXPOSE 22
