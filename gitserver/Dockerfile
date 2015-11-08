@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
   gitolite3
 
 # Fixup stuff for sshd
+RUN mkdir -p /var/run/sshd
 RUN sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config
 RUN sed -i '/session    required     pam_loginuid.so/d' /etc/pam.d/sshd
 
