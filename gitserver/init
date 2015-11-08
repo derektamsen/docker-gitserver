@@ -7,6 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 KEYTYPES=( "dsa" "ecdsa" "ed25519" "rsa" )
 for type in "${KEYTYPES[@]}"; do
   if [[ ! -f "/data/etc/ssh/ssh_host_${type}_key" ]]; then
+    echo "Generating #{type} host key"
     ssh-keygen -t ${type} -f "/data/etc/ssh/ssh_host_${type}_key"
   fi
 done

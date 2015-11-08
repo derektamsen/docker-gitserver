@@ -26,8 +26,8 @@ RUN chmod +x /init
 
 EXPOSE 22
 
-ENTRYPOINT [ '/init', "/usr/sbin/sshd", "-D",
-            '-h /data/etc/ssh/ssh_host_dsa_key',
-            '-h /data/etc/ssh/ssh_host_ecdsa_key',
-            '-h /data/etc/ssh/ssh_host_ed25519_key',
-            '-h /data/etc/ssh/ssh_host_rsa_key' ]
+ENTRYPOINT [ '/init', '/usr/sbin/sshd', '-D',
+            '-h', '/data/etc/ssh/ssh_host_dsa_key',
+            '-h', '/data/etc/ssh/ssh_host_ecdsa_key',
+            '-h', '/data/etc/ssh/ssh_host_ed25519_key',
+            '-h', '/data/etc/ssh/ssh_host_rsa_key' ]
