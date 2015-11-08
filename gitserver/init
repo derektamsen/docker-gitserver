@@ -19,5 +19,13 @@ if [[ ! -d /data/git ]]; then
   chown git:git /data/git
 fi
 
+# setup gitolite if the admin ssh pub key does not exist else just repair hooks
+if ! grep -qs "# gitolite start" /data/git/.ssh/authorized_keys; then
+  echo "${SSH_KEY}" > "/data/git/${SSH_ADMIN}.pub"
+  su git -c "/usr/bin/gitolite setup -pk /data/git/${SSH_ADMIN}.pub"
+else
+  su git -c "/usr/bin/gitolite setup"
+fi
+
 echo "Running: $*"
 exec $*
