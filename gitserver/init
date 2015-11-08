@@ -11,3 +11,6 @@ for type in "${KEYTYPES[@]}"; do
     ssh-keygen -t ${type} -f "/data/etc/ssh/ssh_host_${type}_key"
   fi
 done
+
+echo "Running: $*"
+exec $*
