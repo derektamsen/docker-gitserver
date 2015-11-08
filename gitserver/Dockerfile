@@ -1,5 +1,8 @@
 FROM debian:jessie
 
+ENV LC_ALL=C
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install the services
 RUN apt-get update && apt-get install -y \
   openssh-server
@@ -7,8 +10,6 @@ RUN apt-get update && apt-get install -y \
   gitolite
 
 # gen locales
-ENV LC_ALL=C
-ENV DEBIAN_FRONTEND=noninteractive
 RUN locale-gen en_US.UTF-8
 RUN dpkg-reconfigure locales
 
