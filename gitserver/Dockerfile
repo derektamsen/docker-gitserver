@@ -18,7 +18,7 @@ RUN sed -i '/session    required     pam_loginuid.so/d' /etc/pam.d/sshd
 RUN mkdir -p /data/etc/ssh
 
 # create the git user
-RUN adduser --system --shell /bin/bash --group --disabled-password --home /data/git git
+RUN adduser --system --no-create-home --home /data/git --shell /bin/bash --group --disabled-password git
 
 # add setup script
 ADD init /init
