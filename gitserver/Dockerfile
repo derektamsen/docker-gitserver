@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
   openssh-server \
   git \
-  gitolite
+  gitolite3
 
 # gen locales
 RUN locale-gen en_US.UTF-8
