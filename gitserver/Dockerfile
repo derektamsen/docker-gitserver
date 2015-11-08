@@ -5,8 +5,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the services
 RUN apt-get update && apt-get install -y \
-  openssh-server
-  git
+  openssh-server \
+  git \
   gitolite
 
 # gen locales
