@@ -3,3 +3,8 @@
 echo 'Starting the data container...'
 sudo docker run --memory 512m --cpu-shares 512 -v /data \
   --name gitserver-data derektamsen/gitserver-data
+
+echo 'Starting the service container...'
+sudo docker run -d --restart on-failure:5 --net host --memory 512m \
+  --cpu-shares 512 --read-only --volumes-from gitserver-data \
+  --name gitserver derektamsen/gitserver
