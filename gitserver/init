@@ -8,6 +8,7 @@ KEYTYPES=( "dsa" "ecdsa" "ed25519" "rsa" )
 for type in "${KEYTYPES[@]}"; do
   if [[ ! -f "/data/etc/ssh/ssh_host_${type}_key" ]]; then
     echo "Generating ${type} host key"
+    mkdir -p /data/etc/ssh
     ssh-keygen -t ${type} -f "/data/etc/ssh/ssh_host_${type}_key" -N ''
   fi
 done

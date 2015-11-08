@@ -14,9 +14,6 @@ RUN mkdir -p /var/run/sshd
 RUN sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config
 RUN sed -i '/session    required     pam_loginuid.so/d' /etc/pam.d/sshd
 
-# Create a shareable sshd host key location
-RUN mkdir -p /data/etc/ssh
-
 # create the git user
 RUN adduser --system --no-create-home --home /data/git --shell /bin/bash --group --disabled-password git
 
