@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y \
   git \
   gitolite3
 
+# Improve sshd security
+ADD sshd_config /etc/ssh/sshd_config
+
 # Fixup stuff for sshd
 RUN mkdir -p /var/run/sshd
 RUN sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config
