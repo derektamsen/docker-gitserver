@@ -6,7 +6,7 @@ A gitolite server running in docker. All repositories are stored in the
 # Starting the data and server containers
 - clone repository to your docker host.
 - ```
-  GITSERVER_SSH_KEY="$(cat ~/.ssh/id_rsa.pub)" \
-  GITSERVER_SSH_ADMIN="${USER}" \
+  GITSERVER_SSH_KEY=$(cat ~/.ssh/id_rsa.pub) \
+  GITSERVER_SSH_ADMIN=${USER} \
   docker-compose up -d`
   ```
