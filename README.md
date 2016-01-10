@@ -8,5 +8,5 @@ A gitolite server running in docker. All repositories are stored in the
 - ```
   GITSERVER_SSH_KEY=$(cat ~/.ssh/id_rsa.pub) \
   GITSERVER_SSH_ADMIN=${USER} \
-  docker-compose up -d`
+  docker-compose up -d
   ```
