@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/derektamsen/gitserver:latest.svg)](https://imagelayers.io/?images=derektamsen/gitserver:latest 'Get your own badge on imagelayers.io')
+
 # docker-gitserver
 A gitolite server running in docker. All repositories are stored in the
 'gitserver-data' container. This allows stopping, removing, and upgrading the
