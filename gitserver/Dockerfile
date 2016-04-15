@@ -1,7 +1,7 @@
 FROM debian:jessie
 
 ENV LC_ALL=C
-ENV DEBIAN_FRONTEND=noninteractive
+  DEBIAN_FRONTEND=noninteractive
 
 # Install the services
 RUN apt-get update && apt-get install -y \
