@@ -1,21 +1,23 @@
-FROM debian:jessie
+FROM alpine:3.5
 
 ENV LC_ALL=C DEBIAN_FRONTEND=noninteractive
 
+# create git user group
+RUN addgroup -S git ;\
+  adduser -S -H -h /data/git -s /bin/sh -D git
+
 # Install the services
-RUN apt-get update && apt-get install -y \
-  openssh-server \
+RUN apk update && apk add \
+  openssh \
   git \
-  gitolite3
+  gitolite
 
 # Improve sshd security
 COPY sshd_config /etc/ssh/sshd_config
 
 # Fixup stuff for sshd
 RUN mkdir -p /var/run/sshd ;\
-  sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config ;\
-  sed -i '/session    required     pam_loginuid.so/d' /etc/pam.d/sshd ;\
-  adduser --system --no-create-home --home /data/git --shell /bin/bash --group --disabled-password git
+  sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config
 
 # add setup script
 COPY init /init

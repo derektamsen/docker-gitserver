@@ -1,22 +1,44 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Create the ssh host keys if they dont exist
 export LC_ALL=C
 export DEBIAN_FRONTEND=noninteractive
 
-KEYTYPES=( "dsa" "ecdsa" "ed25519" "rsa" )
-for type in "${KEYTYPES[@]}"; do
-  if [[ ! -f "/data/etc/ssh/ssh_host_${type}_key" ]]; then
-    echo "Generating ${type} host key"
-    mkdir -p /data/etc/ssh
-    ssh-keygen -t ${type} -f "/data/etc/ssh/ssh_host_${type}_key" -N ''
-  fi
-done
+# Generate host keys if they don't exist: dsa, ecdsa, ed25519, rsa
+if [[ ! -f "/data/etc/ssh/ssh_host_dsa_key" ]]; then
+  echo "Generating dsa host key"
+  mkdir -p /data/etc/ssh
+  ssh-keygen -t dsa -f "/data/etc/ssh/ssh_host_dsa_key" -N ''
+fi
 
-# create the git home dir if it doesnt exist
+if [[ ! -f "/data/etc/ssh/ssh_host_ecdsa_key" ]]; then
+  echo "Generating ecdsa host key"
+  mkdir -p /data/etc/ssh
+  ssh-keygen -t ecdsa -f "/data/etc/ssh/ssh_host_ecdsa_key" -N ''
+fi
+
+if [[ ! -f "/data/etc/ssh/ssh_host_ed25519_key" ]]; then
+  echo "Generating ed25519 host key"
+  mkdir -p /data/etc/ssh
+  ssh-keygen -t ed25519 -f "/data/etc/ssh/ssh_host_ed25519_key" -N ''
+fi
+
+if [[ ! -f "/data/etc/ssh/ssh_host_rsa_key" ]]; then
+  echo "Generating rsa host key"
+  mkdir -p /data/etc/ssh
+  ssh-keygen -t rsa -f "/data/etc/ssh/ssh_host_rsa_key" -N ''
+fi
+
+# create the git home dir if it doesn't exist
 if [[ ! -d /data/git ]]; then
   mkdir -p /data/git
   chown git:git /data/git
+fi
+
+# create the git log dir if it doesn't exist
+if [[ ! -d /data/git/.gitolite/logs ]]; then
+  mkdir -p /data/git/.gitolite/logs
+  chown -R git:git /data/git/.gitolite
 fi
 
 # setup gitolite if the admin ssh pub key does not exist else just repair hooks
