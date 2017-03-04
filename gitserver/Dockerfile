@@ -1,7 +1,5 @@
 FROM alpine:3.5
 
-ENV LC_ALL=C DEBIAN_FRONTEND=noninteractive
-
 # create git user group
 RUN addgroup -S git ;\
   adduser -S -H -h /data/git -s /bin/sh -G git -D git
@@ -10,7 +8,8 @@ RUN addgroup -S git ;\
 RUN apk update && apk --update add \
   openssh \
   git \
-  gitolite
+  gitolite \
+  && rm  -rf /tmp/* /var/cache/apk/*
 
 # Improve sshd security
 COPY sshd_config /etc/ssh/sshd_config
@@ -21,5 +20,4 @@ RUN chmod +x /init
 
 EXPOSE 22
 
-ENTRYPOINT ["/init", "/usr/sbin/sshd"]
-CMD ["-D"]
+ENTRYPOINT ["/init", "/usr/sbin/sshd", "-D", "-f", "/etc/ssh/sshd_config"]

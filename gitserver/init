@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
 # Create the ssh host keys if they dont exist
-export LC_ALL=C
-export DEBIAN_FRONTEND=noninteractive
 
 # Generate host keys if they don't exist: dsa, ecdsa, ed25519, rsa
 if [[ ! -f "/data/etc/ssh/ssh_host_ecdsa_key" ]]; then
@@ -21,6 +19,11 @@ if [[ ! -f "/data/etc/ssh/ssh_host_rsa_key" ]]; then
   echo "Generating rsa host key"
   mkdir -p /data/etc/ssh
   ssh-keygen -t rsa -f "/data/etc/ssh/ssh_host_rsa_key" -N ''
+fi
+
+# create the empty dir for sshd if it doesn't exist
+if [[ ! -d /var/empty ]]; then
+  mkdir -p /var/empty
 fi
 
 # create the git home dir if it doesn't exist

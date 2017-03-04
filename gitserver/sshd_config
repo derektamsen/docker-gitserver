@@ -66,6 +66,7 @@ ClientAliveInterval 300
 ClientAliveCountMax 0
 UseDNS no
 #UseLogin no
+PidFile /run/sshd.pid
 
 MaxStartups 2
 
