@@ -2,7 +2,7 @@ FROM alpine:3.5
 
 # create git user group
 RUN addgroup -S git ;\
-  adduser -S -H -h /data/git -s /bin/sh -G git -D git
+  adduser -S -H -h /data/git -s /bin/sh -G git git
 
 # Install the services
 RUN apk update && apk --update add \
