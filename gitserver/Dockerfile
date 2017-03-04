@@ -7,7 +7,7 @@ RUN addgroup -S git ;\
   adduser -S -H -h /data/git -s /bin/sh -G git -D git
 
 # Install the services
-RUN apk update && apk add \
+RUN apk update && apk --update add \
   openssh \
   git \
   gitolite
