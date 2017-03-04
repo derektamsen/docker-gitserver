@@ -2,7 +2,8 @@ FROM alpine:3.5
 
 # create git user group
 RUN addgroup -S git ;\
-  adduser -S -H -h /data/git -s /bin/sh -G git git
+  adduser -S -H -h /data/git -s /bin/sh -G git -D git ;\
+  sed -i -e 's/^git:!:/git:!*:/' /etc/shadow
 
 # Install the services
 RUN apk update && apk --update add \
