@@ -41,5 +41,10 @@ if ! grep -qs "# gitolite start" /data/git/.ssh/authorized_keys; then
   su git -c "/usr/bin/gitolite setup -pk /data/git/${SSH_ADMIN}.pub"
 fi
 
+# migrate gitolite-shell command in authorized_keys file from debian to alpine
+if grep -qs '/usr/share/gitolite3/gitolite-shell' /data/git/.ssh/authorized_keys; then
+  sed -i -e 's|/usr/share/gitolite3/gitolite-shell|/usr/lib/gitolite/gitolite-shell|g' /data/git/.ssh/authorized_keys
+fi
+
 echo "Running: $*"
 exec $*
