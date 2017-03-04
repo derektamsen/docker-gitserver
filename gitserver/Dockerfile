@@ -4,7 +4,7 @@ ENV LC_ALL=C DEBIAN_FRONTEND=noninteractive
 
 # create git user group
 RUN addgroup -S git ;\
-  adduser -S -H -h /data/git -s /bin/sh -D git
+  adduser -S -H -h /data/git -s /bin/sh -G git -D git
 
 # Install the services
 RUN apk update && apk add \
