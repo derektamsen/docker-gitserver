@@ -1,8 +1,8 @@
 FROM alpine:3.5
 
 # create git user group
-RUN addgroup -S git ;\
-  adduser -S -H -h /data/git -s /bin/sh -G git -D git ;\
+RUN addgroup -S -g 5000 git ;\
+  adduser -S -H -h /data/git -s /bin/sh -G git -D -u 5000 git ;\
   sed -i -e 's/^git:!:/git:*:/' /etc/shadow
 
 # Install the services
@@ -13,12 +13,13 @@ RUN apk update && apk --update add \
   && rm  -rf /tmp/* /var/cache/apk/*
 
 # Improve sshd security
-COPY sshd_config /etc/ssh/sshd_config
+COPY gitserver_conf/sshd_config /etc/ssh/sshd_config
 
 # add setup script
-COPY init /init
+COPY gitserver_conf/init /init
 RUN chmod +x /init
 
 EXPOSE 22
 
-ENTRYPOINT ["/init", "/usr/sbin/sshd", "-D", "-f", "/etc/ssh/sshd_config"]
+ENTRYPOINT ["/init", "/usr/sbin/sshd"]
+CMD ["-D", "-f", "/etc/ssh/sshd_config"]
