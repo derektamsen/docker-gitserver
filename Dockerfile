@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:latest
 
 # create git user group
 RUN addgroup -S -g 5000 git ;\
