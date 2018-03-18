@@ -1,20 +1,22 @@
 ---
-version: '2'
+version: '3.2'
 services:
   gitserver:
     image: derektamsen/gitserver
     build: ./
-    mem_limit: 512m
-    cpu_shares: 512
     read_only: true
     restart: on-failure:5
     ports:
       - "2222:22"
     volumes:
-      - data:/data
+      - data-nfs:/data
     environment:
       - SSH_KEY="${GITSERVER_SSH_KEY}"
       - SSH_ADMIN="${GITSERVER_SSH_ADMIN}"
 volumes:
-  data:
+  data-nfs:
     driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=${NFS_SERVER},nolock,soft,rw"
+      device: ":${NFS_VOLUME_DATA}"
