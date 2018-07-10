@@ -2,7 +2,7 @@
 version: '3.2'
 services:
   gitserver:
-    image: derektamsen/gitserver
+    image: quay.io/derektamsen/docker-gitserver
     build: ./
     read_only: true
     restart: on-failure:5
